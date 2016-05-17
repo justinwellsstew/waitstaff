@@ -11,3 +11,23 @@ section{
 	padding: 1em;
 	margin: 1em;
 }
+
+h1 {
+	text-align: center;
+}
+
+#container {
+	width:80%;
+	margin:auto;
+}
+
+#main{
+	float:left;
+}
+
+#main, aside{
+	width: 45%;
+}
+aside {
+	float:right;
+}
