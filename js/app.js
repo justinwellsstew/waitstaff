@@ -1,24 +1,62 @@
-angular.module('tipApp', [])
-.controller('TipCtrl', function($scope){
-	// $scope.mealPrice = 100;
-	// $scope.taxRate = 10;
-	// $scope.tipPercentage = 20;
-	$scope.counter = 0;
-	$scope.tipTotal = 0;
+angular.module('tipApp', ['ngRoute'])
+ .config(['$routeProvider', function($routeProvider){
+        $routeProvider.when('/', {
+            templateUrl : 'templates/home.html',
+            controller : 'HomeCtrl'
+        })   
+.when('/new-meal', {
+    templateUrl : 'templates/new-meal.html',
+    controller : 'MealCtrl',
+})
+.when('/my-earnings', {
+    templateUrl : 'templates/my-earnings.html',
+    controller : 'EarningsCtrl',
+})
+.when('/error', {
+    template : '<p>Error - Page Not Found</p>'
+}).otherwise('/');
+
+}])
+.controller('MealCtrl', function($scope, $rootScope){
 	$scope.submit = function(){
-		$scope.subTotal = ($scope.mealPrice * ($scope.taxRate/100)) + $scope.mealPrice;
-		$scope.tip = ($scope.subTotal * ($scope.tipPercentage/100));
+		$scope.tipTotal = $rootScope.totalTipTotal || 0;
+		$scope.counter =  $rootScope.totalCounter || 0;
+		var mealPrice = $scope.mealPrice;
+		var taxRate = $scope.taxRate;
+		var tipPercentage = $scope.tipPercentage;
+
+		$scope.subTotal = (mealPrice * (taxRate/100)) + mealPrice;
+		$scope.tip = ($scope.subTotal * (tipPercentage/100));
 		$scope.total = $scope.subTotal + $scope.tip;
-		$scope.counter++;
+		$scope.counter = $scope.counter+ 1;
 		$scope.tipTotal = $scope.tip + $scope.tipTotal;
-		$scope.tipAverage = $scope.tipTotal/$scope.counter; 
+		// $rootScope.totalTipAverage = $scope.tipAverage;
+		// $scope.tipAverage = $scope.tipTotal/$scope.counter; 
+		$rootScope.totalTipTotal = $scope.tipTotal;
+		$rootScope.totalCounter = $scope.counter;		
     };
 
+
+	    
     $scope.clear = function(){
     	$scope.mealPrice= 0; $scope.taxRate= 0; $scope.tipPercentage = 0;
-    }
+      }
+
+      console.log($rootScope.counter, $rootScope.tipTotal, $rootScope.tipAverage);
+	})
+	.controller('EarningsCtrl', function($scope, $rootScope){
+
+		$scope.counter = $rootScope.totalCounter;
+		$scope.tipTotal = $rootScope.totalTipTotal;
+		$scope.tipAverage = $scope.tipTotal/$scope.counter;
+	
+
+
 
     $scope.reset = function(){
     	$scope.counter= 0; $scope.tipTotal=0; $scope.subTotal=0; $scope.tip=0; $scope.total=0; $scope.tipAverage=0;
     }
-});
+	})
+
+	.controller('HomeCtrl', function($scope){});
+

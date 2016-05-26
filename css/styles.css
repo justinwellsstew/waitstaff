@@ -1,5 +1,6 @@
 html {
 	background-color:#EEEEEE;
+	font-family: 'helvetica neue', helvetica, sans-serif;
 }
 input {
 	clear: both;
@@ -10,6 +11,10 @@ section{
 	background-color: white;
 	padding: 1em;
 	margin: 1em;
+}
+
+li{
+	margin: 1em 0;
 }
 
 h1 {
@@ -28,6 +33,23 @@ h1 {
 #main, aside{
 	width: 45%;
 }
+
 aside {
 	float:right;
+}
+
+nav {
+	margin: auto;
+	text-align: center;
+}
+
+nav a {
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	width: 10em;
+	padding:.25em;
+	border: 1px solid black;
+
+
 }
