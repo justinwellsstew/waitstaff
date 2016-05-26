@@ -1,4 +1,4 @@
-angular.module('tipApp', ['ngRoute'])
+angular.module('tipApp', ['ngRoute', 'ngAnimate'])
  .config(['$routeProvider', function($routeProvider){
         $routeProvider.when('/', {
             templateUrl : 'templates/home.html',
@@ -17,7 +17,8 @@ angular.module('tipApp', ['ngRoute'])
 }).otherwise('/');
 
 }])
-.controller('MealCtrl', function($scope, $rootScope){
+.controller('MealCtrl', function($scope, $rootScope, $timeout){
+	$scope.submitted = false;	
 	$scope.submit = function(){
 		$scope.tipTotal = $rootScope.totalTipTotal || 0;
 		$scope.counter =  $rootScope.totalCounter || 0;
@@ -33,7 +34,12 @@ angular.module('tipApp', ['ngRoute'])
 		// $rootScope.totalTipAverage = $scope.tipAverage;
 		// $scope.tipAverage = $scope.tipTotal/$scope.counter; 
 		$rootScope.totalTipTotal = $scope.tipTotal;
-		$rootScope.totalCounter = $scope.counter;		
+		$rootScope.totalCounter = $scope.counter;
+		$scope.submitted = true;
+
+		 $timeout(function () {
+        $scope.submitted = false;
+    	}, 2000);
     };
 
 

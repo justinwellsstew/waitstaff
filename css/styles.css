@@ -50,6 +50,14 @@ nav a {
 	width: 10em;
 	padding:.25em;
 	border: 1px solid black;
-
-
 }
+
+.submitted {
+	background-color: white;
+	padding: 1em;
+	transition: all linear .5s;
+}
+
+.submitted.ng-hide-remove {
+	background-color: red;
+	}
