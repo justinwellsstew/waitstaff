@@ -52,9 +52,9 @@ angular.module('tipApp', ['ngRoute', 'ngAnimate'])
 	})
 	.controller('EarningsCtrl', function($scope, $rootScope){
 
-		$scope.counter = $rootScope.totalCounter;
-		$scope.tipTotal = $rootScope.totalTipTotal;
-		$scope.tipAverage = $scope.tipTotal/$scope.counter;
+		$scope.counter = $rootScope.totalCounter || 0;
+		$scope.tipTotal = $rootScope.totalTipTotal || 0;
+		$scope.tipAverage = $scope.tipTotal/$scope.counter || 0;
 	
 
 
